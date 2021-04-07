@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.fuentescreations.photoblogapp.R
 import com.fuentescreations.photoblogapp.adapters.ProfilePhotosAdapter
 import com.fuentescreations.photoblogapp.application.BaseFragment
@@ -37,6 +38,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun setupProfilePhotos(){
 
+        binding.refreshLayout.setOnRefreshListener { profilePhotosViewModel.refreshData() }
+
         val profilePhotosList = mutableListOf<ProfilePhotos>()
         val adapter=ProfilePhotosAdapter(profilePhotosList)
         binding.rvPhotos.adapter=adapter
@@ -44,18 +47,42 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         profilePhotosViewModel.getProfilePhotos.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ResultState.Loading -> {
-
+                    onShowLoading()
                 }
                 is ResultState.Success -> {
+                    onSuccessLoading()
+
+                    val lastPhoto=it.data.last()
+
+                    binding.tvUsername.text = lastPhoto.author
+                    Glide.with(requireContext()).load(lastPhoto.imageUrl).circleCrop().into(binding.ivPhotoProfile)
 
                     profilePhotosList.clear()
                     profilePhotosList.addAll(it.data)
                     adapter.notifyDataSetChanged()
                 }
                 is ResultState.Failure -> {
-                    Log.d("Error", "setupProfilePhotos: ${it.exception}")
+                    onFailureLoading(it.exception.toString())
                 }
             }
         })
+    }
+
+    private fun onShowLoading(){
+        binding.tvRetry.visibility=View.GONE
+        binding.successLayout.visibility=View.GONE
+        binding.refreshLayout.isRefreshing=true
+    }
+    private fun onSuccessLoading(){
+        binding.refreshLayout.isRefreshing=false
+        binding.successLayout.visibility=View.VISIBLE
+        binding.tvRetry.visibility=View.GONE
+
+    }
+    private fun onFailureLoading(error:String){
+        binding.refreshLayout.isRefreshing=false
+        binding.successLayout.visibility=View.GONE
+        binding.tvRetry.visibility=View.VISIBLE
+        Log.d("Error", "setupProfilePhotos: $error")
     }
 }

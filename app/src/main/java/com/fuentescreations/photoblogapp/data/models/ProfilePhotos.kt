@@ -10,5 +10,5 @@ data class ProfilePhotos(
     @SerializedName("url")
     val originUrl:String="",
     @SerializedName("download_url")
-    val imagedUrl:String=""
+    val imageUrl:String=""
 )

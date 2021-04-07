@@ -28,7 +28,7 @@ class ProfilePhotosAdapter(private val profilePhotosList:List<ProfilePhotos>) : 
 
     class ProfilePhotosViewHolder(private val binding: ItemProfilePhotosBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(profilePhotos: ProfilePhotos){
-            Glide.with(binding.root.context).load(profilePhotos.imagedUrl)
+            Glide.with(binding.root.context).load(profilePhotos.imageUrl)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,
