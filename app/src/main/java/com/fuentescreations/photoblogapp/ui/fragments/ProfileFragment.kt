@@ -70,7 +70,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun onShowLoading(){
         binding.tvRetry.visibility=View.GONE
-        binding.successLayout.visibility=View.GONE
         binding.refreshLayout.isRefreshing=true
     }
     private fun onSuccessLoading(){
