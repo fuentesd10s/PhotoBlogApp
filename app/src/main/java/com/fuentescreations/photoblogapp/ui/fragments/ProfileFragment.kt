@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.fuentescreations.photoblogapp.R
 import com.fuentescreations.photoblogapp.adapters.ProfilePhotosAdapter
@@ -20,6 +19,8 @@ import com.fuentescreations.photoblogapp.viewmodels.ProfilePhotosViewModelFactor
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
+
+    private val profilePhotosList = mutableListOf<ProfilePhotos>()
 
     private val profilePhotosViewModel by viewModels<ProfilePhotosViewModel> {
         ProfilePhotosViewModelFactory(
@@ -40,11 +41,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         binding.refreshLayout.setOnRefreshListener { profilePhotosViewModel.refreshData() }
 
-        val profilePhotosList = mutableListOf<ProfilePhotos>()
         val adapter=ProfilePhotosAdapter(profilePhotosList)
         binding.rvPhotos.adapter=adapter
 
-        profilePhotosViewModel.getProfilePhotos.observe(viewLifecycleOwner, Observer {
+        profilePhotosViewModel.getProfilePhotos.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultState.Loading -> {
                     onShowLoading()
@@ -69,19 +69,21 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     }
 
     private fun onShowLoading(){
-        binding.tvRetry.visibility=View.GONE
+        mSnackbar(binding.root,"")
+
         binding.refreshLayout.isRefreshing=true
     }
     private fun onSuccessLoading(){
+        mSnackbar(binding.root,"")
+
         binding.refreshLayout.isRefreshing=false
         binding.successLayout.visibility=View.VISIBLE
-        binding.tvRetry.visibility=View.GONE
-
     }
     private fun onFailureLoading(error:String){
         binding.refreshLayout.isRefreshing=false
-        binding.successLayout.visibility=View.GONE
-        binding.tvRetry.visibility=View.VISIBLE
+
+        mSnackbar(binding.root,"Something went wrong! Please swipe down to refresh")
+
         Log.d("Error", "setupProfilePhotos: $error")
     }
 }
