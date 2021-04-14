@@ -19,9 +19,7 @@ import com.fuentescreations.photoblogapp.viewmodels.ProfilePhotosViewModelFactor
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
-
-    private val profilePhotosList = mutableListOf<ProfilePhotos>()
-
+    
     private val profilePhotosViewModel by viewModels<ProfilePhotosViewModel> {
         ProfilePhotosViewModelFactory(
             ProfilePhotosRepoImpl(
@@ -41,6 +39,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         binding.refreshLayout.setOnRefreshListener { profilePhotosViewModel.refreshData() }
 
+        val profilePhotosList = mutableListOf<ProfilePhotos>()
         val adapter=ProfilePhotosAdapter(profilePhotosList)
         binding.rvPhotos.adapter=adapter
 

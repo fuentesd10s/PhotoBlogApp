@@ -10,4 +10,9 @@
         android:name="com.fuentescreations.photoblogapp.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.fuentescreations.photoblogapp.ui.fragments.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" />
 </navigation>
