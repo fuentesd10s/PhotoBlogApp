@@ -3,6 +3,7 @@ package com.fuentescreations.photoblogapp.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.fuentescreations.photoblogapp.R

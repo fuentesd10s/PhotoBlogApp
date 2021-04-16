@@ -5,12 +5,12 @@
     android:id="@+id/main_graph.xml"
     app:startDestination="@id/profileFragment">
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/profileFragment"
         android:name="com.fuentescreations.photoblogapp.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
+    <keep_state_fragment
         android:id="@+id/feedFragment"
         android:name="com.fuentescreations.photoblogapp.ui.fragments.FeedFragment"
         android:label="fragment_feed"

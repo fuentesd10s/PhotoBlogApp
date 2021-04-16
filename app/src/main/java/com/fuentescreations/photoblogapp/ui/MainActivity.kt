@@ -2,12 +2,11 @@ package com.fuentescreations.photoblogapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigation
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.fuentescreations.photoblogapp.R
+import com.fuentescreations.photoblogapp.application.KeepStateNavigator
 import com.fuentescreations.photoblogapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,11 +15,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        // get fragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
+
+        // setup custom navigator
+        val navigator = KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
+        navController.navigatorProvider.addNavigator(navigator)
+
+        // set navigation graph
+        navController.setGraph(R.navigation.main_graph)
 
         binding.bottomNavView.setupWithNavController(navController)
     }
