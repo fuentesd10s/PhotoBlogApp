@@ -9,21 +9,21 @@ import com.fuentescreations.photoblogapp.R
 import com.fuentescreations.photoblogapp.adapters.ProfilePhotosAdapter
 import com.fuentescreations.photoblogapp.application.BaseFragment
 import com.fuentescreations.photoblogapp.application.ResultState
-import com.fuentescreations.photoblogapp.data.models.ProfilePhotos
-import com.fuentescreations.photoblogapp.data.remote.ProfilePhotosDataSource
+import com.fuentescreations.photoblogapp.data.models.Photos
+import com.fuentescreations.photoblogapp.data.remote.PhotosDataSource
 import com.fuentescreations.photoblogapp.databinding.FragmentProfileBinding
-import com.fuentescreations.photoblogapp.domain.ProfilePhotosRepoImpl
+import com.fuentescreations.photoblogapp.domain.PhotosRepoImpl
 import com.fuentescreations.photoblogapp.viewmodels.ProfilePhotosViewModel
-import com.fuentescreations.photoblogapp.viewmodels.ProfilePhotosViewModelFactory
+import com.fuentescreations.photoblogapp.viewmodels.PhotosViewModelFactory
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
     
     private val profilePhotosViewModel by viewModels<ProfilePhotosViewModel> {
-        ProfilePhotosViewModelFactory(
-            ProfilePhotosRepoImpl(
-                ProfilePhotosDataSource()
+        PhotosViewModelFactory(
+            PhotosRepoImpl(
+                PhotosDataSource()
             )
         )
     }
@@ -39,11 +39,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         binding.refreshLayout.setOnRefreshListener { profilePhotosViewModel.refreshData() }
 
-        val profilePhotosList = mutableListOf<ProfilePhotos>()
+        val profilePhotosList = mutableListOf<Photos>()
         val adapter=ProfilePhotosAdapter(profilePhotosList)
         binding.rvPhotos.adapter=adapter
 
-        profilePhotosViewModel.getProfilePhotos.observe(viewLifecycleOwner, {
+        profilePhotosViewModel.getPhotos.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultState.Loading -> {
                     onShowLoading()

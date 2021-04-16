@@ -2,12 +2,12 @@ package com.fuentescreations.photoblogapp.viewmodels
 
 import androidx.lifecycle.*
 import com.fuentescreations.photoblogapp.application.ResultState
-import com.fuentescreations.photoblogapp.data.models.ProfilePhotos
-import com.fuentescreations.photoblogapp.domain.ProfilePhotosRepo
+import com.fuentescreations.photoblogapp.data.models.Photos
+import com.fuentescreations.photoblogapp.domain.PhotosRepo
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
-class ProfilePhotosViewModel(private val repo:ProfilePhotosRepo) : ViewModel(){
+class ProfilePhotosViewModel(private val repo:PhotosRepo) : ViewModel(){
 
     private val loadTrigger = MutableLiveData(Unit)
 
@@ -15,7 +15,7 @@ class ProfilePhotosViewModel(private val repo:ProfilePhotosRepo) : ViewModel(){
         loadTrigger.value = Unit
     }
 
-    val getProfilePhotos: LiveData<ResultState<List<ProfilePhotos>>> = loadTrigger.switchMap {
+    val getPhotos: LiveData<ResultState<List<Photos>>> = loadTrigger.switchMap {
 
         liveData(Dispatchers.IO) {
 
@@ -30,7 +30,7 @@ class ProfilePhotosViewModel(private val repo:ProfilePhotosRepo) : ViewModel(){
     }
 }
 
-class ProfilePhotosViewModelFactory(private val repo:ProfilePhotosRepo):ViewModelProvider.Factory{
+class PhotosViewModelFactory(private val repo:PhotosRepo):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return ProfilePhotosViewModel(repo) as T
     }

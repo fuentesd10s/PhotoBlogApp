@@ -10,10 +10,10 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.fuentescreations.photoblogapp.data.models.ProfilePhotos
+import com.fuentescreations.photoblogapp.data.models.Photos
 import com.fuentescreations.photoblogapp.databinding.ItemProfilePhotosBinding
 
-class ProfilePhotosAdapter(private val profilePhotosList:List<ProfilePhotos>) : RecyclerView.Adapter<ProfilePhotosAdapter.ProfilePhotosViewHolder>() {
+class ProfilePhotosAdapter(private val photosList:List<Photos>) : RecyclerView.Adapter<ProfilePhotosAdapter.ProfilePhotosViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfilePhotosViewHolder {
         val binding=ItemProfilePhotosBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
@@ -22,13 +22,13 @@ class ProfilePhotosAdapter(private val profilePhotosList:List<ProfilePhotos>) : 
         return holder
     }
 
-    override fun onBindViewHolder(holder: ProfilePhotosViewHolder, position: Int) { holder.bind(profilePhotosList[position]) }
+    override fun onBindViewHolder(holder: ProfilePhotosViewHolder, position: Int) { holder.bind(photosList[position])}
 
-    override fun getItemCount(): Int = profilePhotosList.size
+    override fun getItemCount(): Int = photosList.size
 
     class ProfilePhotosViewHolder(private val binding: ItemProfilePhotosBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(profilePhotos: ProfilePhotos){
-            Glide.with(binding.root.context).load(profilePhotos.imageUrl)
+        fun bind(photos: Photos){
+            Glide.with(binding.root.context).load(photos.imageUrl)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,

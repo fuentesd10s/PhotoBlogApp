@@ -1,11 +1,11 @@
 package com.fuentescreations.photoblogapp.data.api
 
-import com.fuentescreations.photoblogapp.data.models.ProfilePhotos
+import com.fuentescreations.photoblogapp.data.models.Photos
 import retrofit2.http.GET
 import retrofit2.http.Url
 
 interface APIService {
 
     @GET
-    suspend fun getProfilePhotos(@Url url:String=""):List<ProfilePhotos>
+    suspend fun profilePhotos(@Url url:String=""):List<Photos>
 }
