@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -30,9 +31,12 @@ class FeedPhotosAdapter(private val photosList: List<Photos>) : RecyclerView.Ada
     inner class FeedPhotosViewHolder(private val binding: ItemFeedPhotosBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(feedPhoto: Photos) {
 
-            binding.tvUsername.text = feedPhoto.author
+            val mContext = binding.root.context
 
-            Glide.with(binding.root.context)
+            binding.tvUsername.text = feedPhoto.author
+            binding.options.setOnClickListener { Toast.makeText(mContext, "Working on it ;)", Toast.LENGTH_SHORT).show() }
+
+            Glide.with(mContext)
                 .load(feedPhoto.imageUrl)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -60,7 +64,7 @@ class FeedPhotosAdapter(private val photosList: List<Photos>) : RecyclerView.Ada
                 .circleCrop()
                 .into(binding.ivProfilePhoto)
 
-            Glide.with(binding.root.context)
+            Glide.with(mContext)
                 .load(feedPhoto.imageUrl)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(

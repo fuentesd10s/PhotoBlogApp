@@ -6,6 +6,6 @@
         android:title="Profile" />
     <item
         android:id="@+id/feedFragment"
-        android:icon="@drawable/ic_list_post"
+        android:icon="@drawable/ic_dashboard"
         android:title="Feed" />
 </menu>
