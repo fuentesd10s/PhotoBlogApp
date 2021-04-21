@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.fuentescreations.photoblogapp.R
 import com.fuentescreations.photoblogapp.adapters.FeedPhotosAdapter
-import com.fuentescreations.photoblogapp.adapters.ProfilePhotosAdapter
 import com.fuentescreations.photoblogapp.application.BaseFragment
 import com.fuentescreations.photoblogapp.application.ResultState
 import com.fuentescreations.photoblogapp.data.models.Photos

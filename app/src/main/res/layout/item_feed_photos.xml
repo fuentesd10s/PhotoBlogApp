@@ -55,6 +55,50 @@
         app:layout_constraintTop_toBottomOf="@+id/ly"
         tools:background="@drawable/ic_launcher_background" />
 
+    <LinearLayout
+        android:id="@+id/lyInteractionSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/decoration"
+        app:layout_constraintTop_toBottomOf="@id/ivFeedPhoto">
+
+        <TextView
+            android:id="@+id/tvLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_star"
+            android:text="Like"/>
+        <TextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_comment"
+            android:text="Comment"/>
+        <TextView
+            android:id="@+id/tvShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_share"
+            android:text="Share"/>
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/progressBarFeedPhoto"
         style="?android:attr/progressBarStyle"
@@ -73,9 +117,9 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/md_blue_grey_500"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/ivFeedPhoto"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/lyInteractionSection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

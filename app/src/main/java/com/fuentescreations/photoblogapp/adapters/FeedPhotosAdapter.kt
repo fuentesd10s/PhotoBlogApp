@@ -35,6 +35,9 @@ class FeedPhotosAdapter(private val photosList: List<Photos>) : RecyclerView.Ada
 
             binding.tvUsername.text = feedPhoto.author
             binding.options.setOnClickListener { Toast.makeText(mContext, "Working on it ;)", Toast.LENGTH_SHORT).show() }
+            binding.tvLike.setOnClickListener { Toast.makeText(mContext, "Like!", Toast.LENGTH_SHORT).show() }
+            binding.tvComment.setOnClickListener { Toast.makeText(mContext, "Comment!", Toast.LENGTH_SHORT).show() }
+            binding.tvShare.setOnClickListener { Toast.makeText(mContext, "Share!", Toast.LENGTH_SHORT).show() }
 
             Glide.with(mContext)
                 .load(feedPhoto.imageUrl)
@@ -45,7 +48,7 @@ class FeedPhotosAdapter(private val photosList: List<Photos>) : RecyclerView.Ada
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        binding.progressBarProfilePhoto.visibility = View.GONE
+//                        binding.progressBarProfilePhoto.visibility = View.GONE
                         return false
                     }
 
@@ -57,6 +60,8 @@ class FeedPhotosAdapter(private val photosList: List<Photos>) : RecyclerView.Ada
                         isFirstResource: Boolean
                     ): Boolean {
                         binding.progressBarProfilePhoto.visibility = View.GONE
+                        binding.lyInteractionSection.visibility = View.VISIBLE
+                        binding.decoration.visibility = View.VISIBLE
                         return false
                     }
 
