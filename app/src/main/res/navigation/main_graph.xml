@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_graph.xml"
-    app:startDestination="@id/profileFragment">
+    android:id="@+id/main_graph"
+    app:startDestination="@+id/profile">
 
-    <keep_state_fragment
-        android:id="@+id/profileFragment"
-        android:name="com.fuentescreations.photoblogapp.ui.fragments.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <keep_state_fragment
-        android:id="@+id/feedFragment"
-        android:name="com.fuentescreations.photoblogapp.ui.fragments.FeedFragment"
-        android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" />
+    <include app:graph="@navigation/profile"/>
+    <include app:graph="@navigation/feed"/>
+
 </navigation>
